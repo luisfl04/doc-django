@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+<body>
+   
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        <fieldset>
+            <legend><h1>{{ question.question_txt }}</h1></legend>
+            {% if error_message %}<p><b>{{error_message}}</b></p>{% endif %}
+            {% for choice in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice {{forloop.counter}}" value="{{choice.id}}">
+            <label for="choice {{forloop.counter}}"> {{choice.choice_txt}} </label> 
+            {% endfor %}
+        </fieldset>
+        <input type="submit" value="vote">
+    </form>
+
+    <a href="{% url 'polls:index'%}">Clique aqui para voltar a pag inicial </a>
+    
+</body>
+</html>
