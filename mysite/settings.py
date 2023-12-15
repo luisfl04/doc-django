@@ -43,7 +43,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates" ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,3 +110,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# arquivos estáticos fora do app:
+# STATICFILES_DIRS = [
+#     BASE_DIR / "polls/static/",
+#     "arq_estaticos/static/",
+# ]
+
+# Passando arquivos estáticos sem usar o "staticfiles do django":
+# STATIC_ROOT = "exemplo/static/"
