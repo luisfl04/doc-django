@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "debug_toolbar",
     "polls.apps.PollsConfig",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -32,6 +33,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -119,3 +121,31 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Passando arquivos estáticos sem usar o "staticfiles do django":
 # STATIC_ROOT = "exemplo/static/"
+
+# Adicionando ips internos para depuração:
+
+INTERNAL_IPS = [
+    "127.0.0.1"
+]
+
+# adicionando personalização ao painél de depuração:
+
+# DEBUG_TOOLBAR_PANELS = [
+#     "debug_toolbar.panels.history.HistoryPanel",
+# ]
+
+# Adicionando configuração de painel de depuração:
+
+DEBUG_TOOLBAR_CONFIG = {
+    "DESABLED_PANELS": [
+        "debug_toolbar.panels.redirects.RedirectsPanel",
+        "debug_toolbar.panels.profiling.ProfilingPanel",
+    ],
+    "INSERT_BEFORE": "</body>",
+    "RENDER_PANELS": "None",
+    "RESULTS_CACHE_SIZE": "25",
+    "ROOT_TAG_EXTRA_ATTRS": "",
+    "SHOW_COLLAPSED": "False",
+    "SHOW_TOOLBAR_CALLBACK": "debug_toolbar.middleware.show_toolbar",
+    "OBSERVE_REQUEST": "debug_toolbar.toolbar.observe_request",
+}
