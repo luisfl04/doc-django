@@ -125,7 +125,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Adicionando ips internos para depuração:
 
 INTERNAL_IPS = [
-    "127.0.0.1"
+    "127.0.0.1",
 ]
 
 # adicionando personalização ao painél de depuração:
@@ -147,5 +147,25 @@ DEBUG_TOOLBAR_CONFIG = {
     "ROOT_TAG_EXTRA_ATTRS": "",
     "SHOW_COLLAPSED": "False",
     "SHOW_TOOLBAR_CALLBACK": "debug_toolbar.middleware.show_toolbar",
-    "OBSERVE_REQUEST": "debug_toolbar.toolbar.observe_request",
+    "OBSERVE_REQUEST_CALLBACK": "debug_toolbar.toolbar.observe_request",
+    "TOOLBAR_LANGUAGE": "None",
+    "EXTRA_SIGNALS": [],
+    "ENABLE_STACKTRACES": "True", # Utilize "ENABLE_STACKTRACES_LOCALS" para infos mais detalhadas.    
+    "HIDE_IN_STACKTRACES": [
+        "socketserver",
+        "wsgiref",
+        "debug_toolbar",
+        "django.db",
+        "django.core.handlers",
+        "django.core.servers",
+        "django.utils.decorators",
+        "django.utils.deprecation",
+        "django.utils.functional",
+    ],
+    "PRETIFY_SQL": "True",
+    "PROFILER_CAPTURE_PROJECT_CODE": "True",
+
 }
+
+
+
