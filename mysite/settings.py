@@ -125,7 +125,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Adicionando ips internos para depuração:
 
 INTERNAL_IPS = [
-    "127.0.0.1",
+    "127.0.0.1"
 ]
 
 # adicionando personalização ao painél de depuração:
@@ -137,22 +137,24 @@ INTERNAL_IPS = [
 # Adicionando configuração de painel de depuração:
 
 DEBUG_TOOLBAR_CONFIG = {
-    "DESABLED_PANELS": [
-        "debug_toolbar.panels.redirects.RedirectsPanel",
+    "DISABLE_PANELS": [
         "debug_toolbar.panels.profiling.ProfilingPanel",
-    ],
-    "INSERT_BEFORE": "</body>",
-    "RENDER_PANELS": "None",
-    "RESULTS_CACHE_SIZE": "25",
-    "ROOT_TAG_EXTRA_ATTRS": "",
-    "SHOW_COLLAPSED": "False",
-    "SHOW_TOOLBAR_CALLBACK": "debug_toolbar.middleware.show_toolbar",
-    "OBSERVE_REQUEST_CALLBACK": "debug_toolbar.toolbar.observe_request",
-    "TOOLBAR_LANGUAGE": "None",
-    "EXTRA_SIGNALS": [],
-    "ENABLE_STACKTRACES": "True", # Utilize "ENABLE_STACKTRACES_LOCALS" para infos mais detalhadas.    
-    "HIDE_IN_STACKTRACES": [
+        "debug_toolbar.panels.redirects.RedirectsPanel",
+    ], # Painéis desabilitados, mas ainda exibidos.
+    "INSERT_BEFORE": "</body>", # Tag HTML que a barra de ferramentas se insere antes(lá ele).
+    "RENDER_PANELS": None, # Modo de renderização da barra de ferramentas. "true" "false" or "none".
+    "RESULTS_CACHE_SIZE": 25, # Quantidade de resultados que serão armazenados na memória.
+    "ROOT_TAG_EXTRA_ATTRS": "", # Config inserida no modelo raiz. É usada principalmente para resolver conflitos no lado do cliente em relação a estruturas. Depende do tipo de debugação que está se fazendo, com "angular.js" ficaria "ng-non-bindable". 
+    "SHOW_COLLAPSED": False, # Se true, a barra de ferramentas e recolhida.
+    "SHOW_TOOLBAR_CALLBACK": "debug_toolbar.middleware.show_toolbar", # Config que define se a barra de ferramentas é exibida ou não, depende se a função passada retorna True ou false.
+    "OBSERVE_REQUEST_CALLBACK": "debug_toolbar.toolbar.observe_request", # define se a barra de ferramentas será atualizada ou não em solicitações AJAX;
+    "TOOLBAR_LANGUAGE": None, # Idioma da barra de ferramentas.
+    "EXTRA_SIGNALS": [], # Adição de sináis extras no painél "signals".
+    "ENABLE_STACKTRACES": True, # Config que dá detalhamento aos processos nos painéis Cache e SQL.
+    # "ENABLE_STACKTRACES_LOCALS": False, | Se true o detalhamento é mais detalhado.
+    "HIDE_IN_STACKTRACES": (
         "socketserver",
+        "threading",
         "wsgiref",
         "debug_toolbar",
         "django.db",
@@ -161,9 +163,16 @@ DEBUG_TOOLBAR_CONFIG = {
         "django.utils.decorators",
         "django.utils.deprecation",
         "django.utils.functional",
-    ],
-    "PRETIFY_SQL": "True",
-    "PROFILER_CAPTURE_PROJECT_CODE": "True",
+    ), # Config que ELIMINA entradas relacionadas com o servidor, evitando atrazo na renderização da barra de ferramentas e estruturas DOM extensas.
+    "PRETIFY_SQL": True, # Se true, faz com que os tokens SQL fiquem agrupados, ou seja, faz o alinhamento e o recuo dos tokens.
+    "PROFILER_CAPTURE_PROJECT_CODE": True, # Se true, inclúi todas as chamadas de funções do projeto no painél de depuração profile. O código do projeto(Onde se chama as funções), está no caminho definido em "BASE.DIR" de settings.  
+    "PROFILER_MAX_DEPTH": 10, # definição da profundiade da chamada de funções na análise de perfil
+    "PROFILER_THRESHOLD_RATIO": 8, # definindo um limite para a inclusão de chamadas no peinél de depuração de perfil. Quanto maior o limite, mais funções serão incluidas. Já se o limite for menor, o tempo de renderização será mais rápido, porém, haverá exclusão(perda) de dados.
+    "SHOW_TEMPLATE_CONTEXT": True, # Se true, o contexto é incluido junto com o template no painel de renderização de template. Pode ser útil desativar esta função quando se tem contextos grandes demais ou quando estes contextos possuem estruturas de dados preguiçosas e é melhor não analisá-las.
+    "SKIP_TEMPLATE_PREFIXES": (
+        "django/forms/widgets/", "admin/widgets/"
+    ),
+    "SQL_WARNING_THRESHOLD": 500, # chamas sql que demorarem mais do que o tempo(milissegundos) definido serão destacadas no painél de depuração do SQL.
 
 }
 
